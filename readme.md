@@ -194,20 +194,6 @@ Users can upload CSV files containing multiple booking records to generate predi
 
 ---
 
-# 📈 Visualizing the Dashboard
-
-The interactive Streamlit dashboard provides a clean and user-friendly interface for real-time booking prediction analysis.
-
-Users can:
-
-- 📊 View prediction results instantly
-- 📂 Upload CSV files for batch predictions
-- 🧠 Analyze customer booking behavior
-- ⚡ Interact with the Machine Learning model in real time
-- 📈 Explore prediction outcomes through visual components
-
-
-
 
 # 🖼️ Application Screenshots
 
