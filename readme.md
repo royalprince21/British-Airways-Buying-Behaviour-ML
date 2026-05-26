@@ -206,22 +206,10 @@ Users can:
 - ⚡ Interact with the Machine Learning model in real time
 - 📈 Explore prediction outcomes through visual components
 
-<br>
-
-<p align="center">
-  <img src="img/dashboard_preview.png" width="900">
-</p>
-
-<br>
 
 ---
 
 # 🖼️ Application Screenshots
-
-## 📌 Dashboard Home Page
-
-
-
 ---
 
 ## 📌 Single Prediction Interface
