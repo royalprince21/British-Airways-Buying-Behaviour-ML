@@ -1,0 +1,144 @@
+from sklearn.base import BaseEstimator,TransformerMixin
+import pandas as pd
+import numpy as np
+
+class FeatureEngineer(BaseEstimator,TransformerMixin):
+    '''
+    Customer transformer to complete the feature engineering in British Airways 
+    customer buying behavior dataset. Call fit_transform() to complete feature engineering.
+    The fit_transform() method accepts pandas dataframe for the X value. if you are 
+    adding this to a pipeline get the completed feature engineering dataset using this class
+    and pass it as an argument to your next transformer or pipeline.
+    '''
+    def __init__(self, is_frequency_encode):
+        '''
+        Initialize with a flag to either frequency encode the high cardinality features 
+        ['departure','arrival','booking_origin'] or not using is_frequency_encode
+
+        Args:
+            is_frequency_encode: Either True or False
+        '''
+        super().__init__()
+        self.is_frequency_encode = is_frequency_encode
+    
+    def fit(self,X,y):
+        '''
+        Fit the dataframe and label. Returns the transformer.
+
+        Args:
+            X(pd.Dataframe): British Airways customer buying behavior dataset
+            y(pd.Series): The labels for the dataset
+        '''
+        return self
+    
+    def create_base_features(self,df):
+        '''
+        Complete base feature engineering like binning and extraction
+
+        Args:
+            df(pd.Dataframe): British Airways customer buying behavior dataset
+        '''
+        #Map flight day in text to number in day of week
+        days_mapping = {
+            'Mon':1,
+            'Tue':2,
+            'Wed':3,
+            'Thu':4,
+            'Fri':5,
+            'Sat':6,
+            'Sun':7
+        }
+        df['flight_day'] = df['flight_day'].map(days_mapping)
+
+        # Type of the stays (short, vacation, etc)
+        stay_condition = [df['length_of_stay'] <= 15,df['length_of_stay'] <= 60, df['length_of_stay'] <= 180]
+        df['stay_type'] = np.select(stay_condition,['short','vacation','temporary_residence'],default='residence')
+
+        # Passenger grouping based on number of passengers
+        passenger_condition = [df['num_passengers'] > 2,df['num_passengers'] == 2]
+        df['passenger_kind'] = np.select(passenger_condition,['group','pair'],default='solo') 
+
+        # 1. Traveling in am or pm  from flight_hour
+        # 2. Whether travelling weekend or weekday from flight_day
+        df['travel_am_pm'] = np.where(df['flight_hour']<12,'am','pm')
+        df['weekend'] = np.where(df['flight_day'] <=5,0,1) 
+
+        # Long or Short travel from fliht duration
+        df['travelling_kind'] = np.where(df['flight_duration'] <=4.5,'short','long')
+
+        # Split route into Departure and arrival features
+        df[['departure','arrival']] = df['route'].str.extract(r'(.{3})(.{3})')
+        df.drop(columns=['route'],inplace=True)
+
+        # Category of leads from teh purchase_lead
+        lead_condition = [
+            df['purchase_lead'] <= 7,
+            df['purchase_lead'] <= 30,
+            df['purchase_lead'] <= 90
+        ]
+        df['lead_category'] = np.select(lead_condition,['last_minute','short_lead','medium_lead'],default='long_lead')
+
+        # Period of travel (morning afternoon,etc)
+        flight_period_condition = [
+            df['flight_hour'] <6,
+            df['flight_hour'] <12,
+            df['flight_hour'] <18
+        ]
+        df['flight_period'] = np.select(flight_period_condition,['early_morning','morning','afternoon'],default='evening')
+        return df
+
+        ## Interaction Features
+
+    def create_interaction_features(self,df):
+        '''
+        Complete feature engineering using feature interactions, creating new feature using 2
+         or more features.
+
+        Args:
+            df(pd.Dataframe): British Airways customer buying behavior dataset
+        '''
+
+        # Passengers taking extra services (ordinal)
+        df['extra_services_count'] = df[['wants_extra_baggage','wants_preferred_seat','wants_in_flight_meals']].sum(axis=1)
+
+        # Passengers booking and travel behavior
+        booking_conditions = [
+            (df['purchase_lead'] < 7) & (df['stay_type'] == 'short'),
+            (df['purchase_lead'] >= 7) & (df['stay_type'] == 'short'),
+            (df['purchase_lead'] < 7) & (df['stay_type'].isin(['vacation','temporary_residence','residence'])),
+            (df['purchase_lead'] >= 7) & (df['stay_type'].isin(['vacation','temporary_residence','residence']))
+        ]
+        df['booking_behavior'] = np.select(booking_conditions,['urgent','planned_vacation','urgent_long_stay','planned_long_stay'],default='standard')
+        return df
+
+    def frequency_encode(self, df):
+
+        # Frequency encoding for the high cardinality features
+
+        freq_cols = ['departure','arrival','booking_origin']
+        for col in freq_cols:
+            freq = df[col].value_counts(normalize=True)
+            df[col+'_freq'] = df[col].map(freq)
+        df.drop(columns=freq_cols,inplace=True)
+        return df
+    
+    def transform(self,df):
+        '''
+        Run the transformer on the dataset to complete the feature engineering.
+
+        Args:
+            df(pd.Dataframe): British Airways customer buying behavior dataset
+        '''
+        df = df.copy(deep=True)
+        df = self.create_base_features(df)
+        df = self.create_interaction_features(df)
+        if self.is_frequency_encode:
+            print('Frequency encoded')
+            df = self.frequency_encode(df)
+        return df
+    
+    def get_feature_names_out(self, input_features=None):
+        
+        if self.feature_names_out_ is None:
+            return np.array(input_features)
+        return np.array(self.feature_names_out_)

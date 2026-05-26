@@ -1,0 +1,13 @@
+
+pipeline:
+  preprocessing: 'models/pipeline/preprocessing_pipeline.joblib'
+  preprocessing_cat: 'models/pipeline/preprocessing_cat_pipeline.joblib'
+
+model:
+  cat_boost:
+    path: 'models/best/ba_cat_boost.joblib'
+    pipeline: 'models/best/ba_cat_boost_pipeline.joblib'
+    params: 'models/best/ba_cat_boost_params.joblib'
+
+dataset:
+  path: 'data/customer_booking.csv'
