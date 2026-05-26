@@ -207,10 +207,10 @@ Users can:
 - 📈 Explore prediction outcomes through visual components
 
 
----
+
 
 # 🖼️ Application Screenshots
----
+
 
 ## 📌 Single Prediction Interface
 
