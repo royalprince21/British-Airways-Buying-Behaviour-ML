@@ -220,13 +220,7 @@ Users can:
 
 ## 📌 Dashboard Home Page
 
-<br>
 
-<p align="center">
-  <img src="img/home_page.png" width="900">
-</p>
-
-<br>
 
 ---
 
@@ -247,7 +241,7 @@ Users can:
 <br>
 
 <p align="center">
-  <img src="img/batch_prediction.png" width="900">
+  <img src="img/Batch_Prediction.png" width="900">
 </p>
 
 <br>
