@@ -335,13 +335,14 @@ Booking completion probability displayed
 
 ## Royal Prince Alex John
 
-📧 Email: royal-prince.alex-john@edu.dsti.institute
+📧 Email:
+[royal-prince.alex-john@edu.dsti.institute](mailto:royal-prince.alex-john@edu.dsti.institute)
 
-🔗 GitHub:  
-https://github.com/royalprince21
+🔗 LinkedIn:
+https://www.linkedin.com/in/royal-prince/
 
-🔗 LinkedIn:  
-(Add your LinkedIn profile link here)
+🔗 GitHub:
+https://github.com/royalprince21/
 
 ---
 
