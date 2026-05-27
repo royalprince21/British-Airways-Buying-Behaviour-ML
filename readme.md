@@ -62,31 +62,61 @@ The dataset contains airline customer booking records and travel-related informa
 
 ```text
 British-Airways-Booking-Prediction/
+PROJECT_NAME/
 │
 ├── data/
-│   ├── raw/
-│   └── processed/
+│   ├── ba_schedule.xlsx
+│   └── customer_booking.csv
 │
-├── notebooks/
-│   ├── exploratory_analysis.ipynb
-│   └── model_training.ipynb
+├── img/
+│
+├── models/
+│   ├── best/
+│   │   ├── ba_cat_boost_params.joblib
+│   │   ├── ba_cat_boost_pipeline.joblib
+│   │   └── ba_cat_boost.joblib
+│   │
+│   └── pipeline/
+│       ├── preprocessing_cat_pipeline.joblib
+│       └── preprocessing_pipeline.joblib
+│
+├── notebook/
+│   ├── catboost_info/
+│   ├── ba_customer_booking.ipynb
+│   └── ba_tier.ipynb
 │
 ├── src/
 │   ├── preprocessing/
-│   │   └── pipeline.py
+│   │   ├── __init__.py
+│   │   ├── data_cleaning.py
+│   │   ├── FeatureEngineer.py
+│   │   ├── Pipeline.py
+│   │   └── preprocessing.py
 │   │
-│   ├── models/
-│   │   └── training.py
+│   ├── training/
+│   │   ├── __init__.py
+│   │   ├── BaseTrainer.py
+│   │   ├── CatBoostTrainer.py
+│   │   ├── LogisticRegressionTrainer.py
+│   │   ├── RandomForestTrainer.py
+│   │   ├── Trainer.py
+│   │   └── XGBoostTrainer.py
+│   │
+│   ├── testing/
+│   │   ├── __init__.py
+│   │   └── test_cat_boost.py
 │   │
 │   ├── ui/
 │   │   └── app.py
 │   │
-│   └── utils/
+│   ├── utils/
+│   │   ├── __init__.py
+│   │   ├── logger.py
+│   │   └── train_test_split.py
+│   │
+│   └── __init__.py
 │
-├── saved_models/
-│
-├── img/
-│
+├── config.yaml
 ├── requirements.txt
 └── README.md
 ```
