@@ -37,16 +37,22 @@ The dataset contains airline customer booking records and travel-related informa
 
 ## 📌 Features Included
 
-- 👥 Number of Passengers
-- ⏳ Purchase Lead Time
-- 🌍 Booking Origin
-- ✈️ Flight Duration
-- 🧳 Trip Type
-- 🛫 Flight Day & Period
-- 🏨 Length of Stay
-- 💺 Travel Class
-- 🎫 Booking Preferences
+- 👥 Number of Passengers  
+- 💳 Sales Channel  
+- ✈️ Trip Type  
+- 📅 Purchase Lead (Days)  
+- 🏨 Length of Stay (Days)  
+- ⏰ Flight Hour  
+- 📆 Flight Day  
+- 🌍 Flight Duration (Hours)  
+- 🛫 Route (e.g., AKLHND)  
+- 🌎 Booking Origin (Country)  
 
+## ✨ Extra Services
+
+- 🧳 Extra Baggage  
+- 💺 Preferred Seat  
+- 🍱 In-flight Meals  
 ---
 
 ## 🎯 Target Variable
