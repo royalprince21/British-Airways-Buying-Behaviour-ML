@@ -1,9 +1,7 @@
 
  # ✈️ British Airways Customer Booking Prediction using Machine Learning
 
-Developed as part of the Virtual Data Science Internship associated with British Airways and DSTI - School of Engineering, this project focuses on predicting whether a customer will successfully complete a flight booking using Machine Learning techniques.
-
-The application analyzes customer travel behavior, booking patterns, and trip-related information to estimate booking completion probability through an interactive prediction dashboard.
+Developed as part of a virtual Data Science internship with British Airways, this project uses Machine Learning techniques to predict whether a customer is likely to complete a flight booking. The system analyzes customer travel behavior, booking preferences, and trip-related information such as route, flight duration, booking origin, and additional services to generate accurate booking success predictions.
 
 ---
 
